@@ -1,11 +1,12 @@
-package com.rafpereira.scriptybot;
+package com.rafpereira.scriptybot.command;
 
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- * Each bot script is a list of commands. A command defines each action that a robot will do.
+ * Each bot script is a list of commands. A command defines each action that a
+ * robot will do.
  * 
  * @author rafaeldearaujopereira
  * @since 1.0
@@ -21,8 +22,13 @@ public abstract class Command {
 	/**
 	 * A list of parameters.
 	 */
-	private ArrayList<Object> parameters = new ArrayList<>();
-	
+	protected HashMap<String, Object> parameters = new HashMap<>();
+
+	/**
+	 * The list of valid parameters for the command.
+	 */
+	protected HashMap<String, Class<?>> parameterDefinitions = new HashMap<>();
+
 	static {
 		try {
 			bot = new Robot();
@@ -30,7 +36,7 @@ public abstract class Command {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Defines how this bot will do its action.
 	 */
@@ -38,6 +44,7 @@ public abstract class Command {
 
 	/**
 	 * Gets the proper command of a type.
+	 * 
 	 * @param type Type.
 	 * @return A command instance of the type.
 	 */
@@ -50,13 +57,24 @@ public abstract class Command {
 		}
 		return command;
 	}
-	
-	public ArrayList<Object> getParameters() {
+
+	/**
+	 * Description of "what" the command will do. It is implemented by each command.
+	 * 
+	 * @return Description of the command.
+	 */
+	public abstract String getDescription();
+
+	public HashMap<String, Object> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(ArrayList<Object> parameters) {
+	public void setParameters(HashMap<String, Object> parameters) {
 		this.parameters = parameters;
 	}
-	
+
+	public HashMap<String, Class<?>> getParameterDefinitions() {
+		return parameterDefinitions;
+	}
+
 }

@@ -1,12 +1,18 @@
 package com.rafpereira.scriptybot.ui;
 
+import java.util.HashMap;
+
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
-import com.rafpereira.scriptybot.CommandType;
+import com.rafpereira.scriptybot.bot.ScriptBot;
+import com.rafpereira.scriptybot.command.CommandType;
 
 /**
  * UI to configure and test the bot.
@@ -17,24 +23,51 @@ import com.rafpereira.scriptybot.CommandType;
  */
 public class ScriptyDummyBotUI extends JPanel {
 	
+	private static final String MAIN_SCRIPT = "<MAIN>";
+	HashMap<String, ScriptBot> scripts = new HashMap<String, ScriptBot>();
+	
 	/**
 	 * Main panel.
 	 */
 	public ScriptyDummyBotUI() {
 		super();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		String[] commandOptions = new String[] {"", "Open Program" , "Write", "Move Mouse To", "Right-Click", "Left-Click", "Hold Alt", "Hold Ctrl", "Hold Shift", "Release Alt", "Release Ctrl", "Release Shift", "Wait"};
-		
-		JComboBox<String> cbCommandOld = new JComboBox<String>(commandOptions);
-		this.add(cbCommandOld);
-		
-		
+		ScriptBot mainScript = new ScriptBot("Main");
+		scripts.put(MAIN_SCRIPT, mainScript);		
+
 		JComboBox<String> cbCommand = new JComboBox<>(CommandType.names());
-		this.add(cbCommand);
+		JButton btAddCommand = new JButton("Add to");
+		JComboBox<ScriptBot> cbScript = new JComboBox<>(getScriptList());
+		
+		JPanel selCommandPanel = new JPanel();
+		selCommandPanel.setLayout(new BoxLayout(selCommandPanel, BoxLayout.X_AXIS));
+		selCommandPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		
+		selCommandPanel.add(new JLabel("Command: "));
+		selCommandPanel.add(cbCommand);
+		selCommandPanel.add(new JLabel(" "));
+		selCommandPanel.add(btAddCommand);
+		selCommandPanel.add(new JLabel(" "));
+		selCommandPanel.add(cbScript);
+		
+		this.add(selCommandPanel);
+		this.add(new JLabel(" "));
 		
 	}
 	
+
+	private ScriptBot[] getScriptList() {
+		ScriptBot[] scriptsArray = new ScriptBot[scripts.size()];
+		int iScript = 0;
+		for (ScriptBot script : scripts.values()) {
+			scriptsArray[iScript] = script;
+			iScript++;
+		}
+		return scriptsArray;
+	}
+
 
 	/**
 	 * Recommended when serialized (JPanel).
