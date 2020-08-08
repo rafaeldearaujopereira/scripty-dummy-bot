@@ -1,5 +1,7 @@
 package com.rafpereira.scriptybot.command;
 
+import com.rafpereira.scriptybot.bot.ScriptBot;
+
 /**
  * All the commands available to use on the bot.
  * 
@@ -9,12 +11,15 @@ package com.rafpereira.scriptybot.command;
  */
 public enum CommandType {
 
+	/** Run a script. */
+	SCRIPT_BOT("Run a script", ScriptBot.class),
+
 	/** Move the mouse to a position */
-	MOVE_MOUSE_TO("Move Move To a Position", MoveMouseTo.class), 
-	
+	MOVE_MOUSE_TO("Move Move To a Position", MoveMouseTo.class),
+
 	/** Left click on the mouse */
-	LEFT_CLICK("Left click", LeftClick.class), 
-	
+	LEFT_CLICK("Left click", LeftClick.class),
+
 	/** Right click on the mouse. */
 	RIGHT_CLICK("Right click", RightClick.class);
 
@@ -22,7 +27,7 @@ public enum CommandType {
 	 * The name of the command type (for use on UI).
 	 */
 	public String name;
-	
+
 	/**
 	 * The class of the command implementation.
 	 */
@@ -30,7 +35,8 @@ public enum CommandType {
 
 	/**
 	 * Constructor, defining the name and the command class.
-	 * @param nameParam Name.
+	 * 
+	 * @param nameParam  Name.
 	 * @param clazzParam Class.
 	 */
 	private CommandType(String nameParam, Class<?> clazzParam) {
@@ -44,11 +50,12 @@ public enum CommandType {
 
 	/**
 	 * Gets the CommandType enum item by its name.
+	 * 
 	 * @param name Name.
 	 * @return Command type item.
 	 */
 	public static CommandType getByName(String name) {
-		for (CommandType type  : values()) {
+		for (CommandType type : values()) {
 			if (type.name.equals(name)) {
 				return type;
 			}
@@ -58,6 +65,7 @@ public enum CommandType {
 
 	/**
 	 * Gets the array of names of command types (for use on UI).
+	 * 
 	 * @return Array of names.
 	 */
 	public static String[] names() {
@@ -68,5 +76,5 @@ public enum CommandType {
 		}
 		return names;
 	}
-	
+
 }

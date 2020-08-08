@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
@@ -40,24 +41,37 @@ public class ScriptyDummyBotUI extends JPanel {
 		JComboBox<String> cbCommand = new JComboBox<>(CommandType.names());
 		JButton btAddCommand = new JButton("Add to");
 		JComboBox<ScriptBot> cbScript = new JComboBox<>(getScriptList());
+		JTextField txNewScript = new JTextField();
+		JButton btCreateNewScript = new JButton("Create");
 		
 		JPanel selCommandPanel = new JPanel();
 		selCommandPanel.setLayout(new BoxLayout(selCommandPanel, BoxLayout.X_AXIS));
-		selCommandPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
-		
+		selCommandPanel.setBorder(new EmptyBorder(1, 1, 1, 1));	
 		selCommandPanel.add(new JLabel("Command: "));
 		selCommandPanel.add(cbCommand);
 		selCommandPanel.add(new JLabel(" "));
 		selCommandPanel.add(btAddCommand);
 		selCommandPanel.add(new JLabel(" "));
 		selCommandPanel.add(cbScript);
+	
+		JPanel newScriptPanel = new JPanel();
+		newScriptPanel.setLayout(new BoxLayout(newScriptPanel, BoxLayout.X_AXIS));
+		newScriptPanel.setBorder(new EmptyBorder(1, 1, 1, 1));	
+		newScriptPanel.add(new JLabel("New Sript: "));
+		newScriptPanel.add(txNewScript);
+		newScriptPanel.add(btCreateNewScript);
+	
 		
 		this.add(selCommandPanel);
 		this.add(new JLabel(" "));
+		this.add(newScriptPanel);
 		
 	}
 	
-
+	/**
+	 * Gets the array of scripts (bots).
+	 * @return Array of scripts.
+	 */
 	private ScriptBot[] getScriptList() {
 		ScriptBot[] scriptsArray = new ScriptBot[scripts.size()];
 		int iScript = 0;
