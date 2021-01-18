@@ -23,7 +23,12 @@ import com.rafpereira.scriptybot.command.CommandType;
  * @version 1.0
  */
 public class ScriptyDummyBotUI extends JPanel {
-	
+
+	/**
+	 * Recommended when serialized (JPanel).
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String MAIN_SCRIPT = "<MAIN>";
 	HashMap<String, ScriptBot> scripts = new HashMap<String, ScriptBot>();
 	
@@ -82,11 +87,6 @@ public class ScriptyDummyBotUI extends JPanel {
 		return scriptsArray;
 	}
 
-
-	/**
-	 * Recommended when serialized (JPanel).
-	 */
-	private static final long serialVersionUID = 1L;
 
 	
 	/**
